@@ -9,5 +9,17 @@ namespace ServerSide
         {
             NAPI.Util.ConsoleOutput("Server started!");
         }
+        [ServerEvent(Event.PlayerConnected)]
+        public void OnPlayerConnect(Player player)
+        {
+            player.SendChatMessage("Hello!" + player.Name);
+            player.GiveWeapon(WeaponHash.Pumpshotgun, 14);
+        }
+
+        [ServerEvent(Event.PlayerSpawn)]
+        public void OnPlayerSpawn(Player player)
+        {
+            player.Position = new Vector3(0.0, 0.0, 72.0);
+        }
     }
 }
