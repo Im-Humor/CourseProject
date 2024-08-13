@@ -1,4 +1,5 @@
 ﻿using GTANetworkAPI;
+using System.Collections.Generic;
 
 namespace ServerSide
 {
@@ -13,13 +14,16 @@ namespace ServerSide
         public void OnPlayerConnect(Player player)
         {
             player.SendChatMessage("Hello!" + player.Name);
-            player.GiveWeapon(WeaponHash.Pumpshotgun, 14);
         }
 
         [ServerEvent(Event.PlayerSpawn)]
         public void OnPlayerSpawn(Player player)
         {
-            player.Position = new Vector3(0.0, 0.0, 72.0);
+
+            player.Position = SpawnLocGetSet.LocGetSetDict["skyscraperSpawn"];
+            player.GiveWeapon(WeaponHash.Pumpshotgun, 14);
+            //player.SetClothes(5, 1, 0);
+            player.GiveWeapon(WeaponHash.Parachute, 0);
         }
     }
 }
